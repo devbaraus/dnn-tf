@@ -2,7 +2,7 @@ version: '3.9'
 services:
   tf:
     container_name: tf
-    image: devsbaraus/tf:latest
+    image: devsbaraus/dnn-tf-2.11:latest
     build: .
     command: bash
     privileged: true
