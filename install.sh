@@ -8,6 +8,9 @@ usermod -aG sudo $USER
 chown -R $USER:$USER /opt/conda
 
 echo $PASS | su - $USER << EOF
+echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc && \
+source ~/.bashrc && \
+
 conda update -n base -c defaults conda -y && \
 conda create -n dnn python=3.10 -y && \
 
@@ -16,14 +19,14 @@ source ~/.bashrc && \
 
 conda activate dnn  && \
 
-conda install -n dnn -c conda-forge cudatoolkit=11.2.2 -y && \
-conda install -n dnn -c conda-forge cudnn -y && \
-conda install -n dnn -c nvidia cuda-nvcc -y && \
+# conda install -n dnn -c nvidia cuda-toolkit=11.8 -y && \
+# conda install -n dnn -c conda-forge cudnn -y && \
+# conda install -n dnn -c nvidia cuda-nvcc -y && \
 
-echo "export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/conda/envs/dnn/" >> ~/.bashrc && \
+# echo "export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/conda/envs/dnn/" >> ~/.bashrc && \
 
 # Install common packages
-pip install tensorflow==2.11.* && \
+pip install tensorflow==2.12.* && \
 pip install matplotlib && \
 pip install numpy && \
 pip install pandas && \
